@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def load_config():
-    with open("config.yaml", "r") as f:
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    config_path = os.path.join(base_dir, "config.yaml")
+    with open(config_path, "r") as f:
         return yaml.safe_load(f)
 
 def get_llm():
