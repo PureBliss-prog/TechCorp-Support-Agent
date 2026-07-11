@@ -2,6 +2,7 @@ import streamlit as st
 import sys
 import os
 import yaml
+import traceback
 
 #This is how app.py is connected to main.py
 sys.path.append(os.path.dirname(__file__))
@@ -499,6 +500,6 @@ if submitted and user_input:
             m["tokens"]      += result["total_tokens"]
             m["escalations"] += 1 if escalated else 0
         except Exception as e:
-            st.error(f"❌ {provider} failed: {str(e)[:200]}")
-            st.info("💡 Switch to Groq · Llama 3.3 which is free and working perfectly.")
-    st.rerun()
+            st.error(f"❌ {provider} failed: {str(e)}")
+            st.code(traceback.format_exc())
+            st.stop()
